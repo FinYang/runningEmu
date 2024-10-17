@@ -16,6 +16,6 @@ Single numerical value
 Given a square matrix, calculates the average over the sum of row averages and column averages
 }
 \examples{
-m <- matrix(seq(16),nrow=4)
+m <- matrix(seq(16), nrow = 4)
 un(m)
 }
