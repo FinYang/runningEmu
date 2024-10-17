@@ -9,7 +9,7 @@
 #' un(m)
 #' @export
 un <- function(m) {
-  mean(apply(m, 1, mean) + apply(m, 2, mean))
+  unCpp(m)
 }
 un2 <- function(m) {
   mean(rowMeans(m) + colMeans(m))
