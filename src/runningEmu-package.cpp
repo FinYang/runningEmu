@@ -1,6 +1,7 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+// [[Rcpp::export]]
 double sumCpp(NumericVector x) {
     double total = 0;
     int n = x.size();
@@ -10,6 +11,7 @@ double sumCpp(NumericVector x) {
     return total;
   }
 
+// [[Rcpp::export]]
 double unCpp(NumericVector x) {
     double total = 0;
     int n = x.size();

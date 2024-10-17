@@ -9,8 +9,35 @@
 #' un(m)
 #' @export
 un <- function(m) {
-  unCpp(m)
+  mean(apply(m, 1, mean) + apply(m, 2, mean))
 }
+
+# fastest
+un22 <- Rcpp::cppFunction("
+double unCpp2(NumericVector x) {
+    double total = 0;
+    int n = x.size();
+    for(int i = 0; i < n; ++i) {
+      total += x[i];
+    }
+    total = total * 2 / n;
+    return total;
+}")
+
+un23 <- Rcpp::cppFunction("
+double unCpp3(NumericMatrix m) {
+  int n = m.nrow();
+  int p = m.ncol();  // Number of columns
+  double sum = 0;
+  for (int i = 0; i < n; i++) {
+    double row_mean = 0;
+    for (int j = 0; j < p; j++) {
+      row_mean += m(i, j);
+    }
+    sum += row_mean / p;  // Divide by number of columns
+  }
+  return sum / 500;
+}")
 un2 <- function(m) {
   mean(rowMeans(m) + colMeans(m))
 }
@@ -32,6 +59,11 @@ un6 <- function(m) {
 un7 <- function(m) {
   sumCpp(m) * 2 / length(m)
 }
+# un8 <- function(m) {
+#   sumCpp2(m) * 2 / length(m)
+# }
+
+
 
 #' @title Second
 #' @description

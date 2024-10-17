@@ -3,3 +3,5 @@
 export(deux)
 export(trois)
 export(un)
+importFrom(Rcpp,sourceCpp)
+useDynLib(runningEmu, .registration = TRUE)
